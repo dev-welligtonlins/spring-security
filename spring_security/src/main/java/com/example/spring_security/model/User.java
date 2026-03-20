@@ -3,15 +3,20 @@ package com.example.spring_security.model;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Table(name = "users")
@@ -26,6 +31,14 @@ public class User implements UserDetails{
     private String password;
     @Column(name = "user_role")
     private UserRole role;
+    
+    @OneToOne(mappedBy = "clients", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Client client;
+
+    // @OneToOne(mappedBy = "barbershops", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonManagedReference
+    // private Barbershop barbershop;
 
     public User() {
 
@@ -44,15 +57,15 @@ public class User implements UserDetails{
     public UserRole getRole() {
         return role;
     }
-    
+  
+    public Client getClient() {
+        return client;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        }
-        else {
-            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-        }
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+
     }
     @Override
     public String getPassword() {

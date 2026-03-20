@@ -2,7 +2,8 @@ package com.example.spring_security.model;
 
 public enum UserRole {
     ADMIN("admin"),
-    USER("user");
+    USER("user"),
+    CLIENT("client");
 
     private String role;
     

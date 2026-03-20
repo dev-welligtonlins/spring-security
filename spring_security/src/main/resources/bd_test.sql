@@ -6,14 +6,35 @@ CREATE TABLE IF NOT EXISTS users (
     user_role TEXT NOT NULL
 );
 
-
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE IF NOT EXISTS clients (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    product_name TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
     user_id TEXT NOT NULL,
 
     CONSTRAINT fk_user
     FOREIGN KEY (user_id)
     REFERENCES users(id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS barbershops (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    user_id TEXT NOT NULL,
+    
+    CONSTRAINT fk_user
+    FOREIGN KEY (user_id)
+    REFERENCES users(id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS services (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    product_name TEXT UNIQUE NOT NULL,
+    barbershop_id TEXT NOT NULL,
+
+    CONSTRAINT fk_user
+    FOREIGN KEY (barbershop_id)
+    REFERENCES barbershops(id)
     ON DELETE CASCADE
 );
