@@ -32,7 +32,7 @@ public class User implements UserDetails{
     @Column(name = "user_role")
     private UserRole role;
     
-    @OneToOne(mappedBy = "clients", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Client client;
 
@@ -58,9 +58,9 @@ public class User implements UserDetails{
         return role;
     }
   
-    public Client getClient() {
-        return client;
-    }
+    // public Client getClient() {
+    //     return client;
+    // }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

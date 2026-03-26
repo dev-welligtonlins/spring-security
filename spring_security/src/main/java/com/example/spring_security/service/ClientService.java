@@ -21,18 +21,22 @@ public class ClientService {
         return this.repo.save(obj);
     }
  
-    @Override
-    public List<Client> findAll(){
-        return this.repo.findAll();
+    // @Override
+    // public List<Client> findAll(){
+    //     return this.repo.findAll();
+    // }
+
+    public Client findById(String id){
+        return this.repo.findById(id).orElseThrow(() -> new RuntimeException("não encontrado"));
     }
 
-    public Optional findById(String id){
-        return this.repo.findById(id);
-    }
-
-    @Override
     public void delete(String id){
-        Optional obj = this.repo.findById(id);
+        Client obj = this.repo.findById(id).orElseThrow(() -> new RuntimeException("não encontrado"));
         this.repo.delete(obj);
     }
+
+    public Client findByUserId(String id){
+        return this.repo.findByUserId(id).orElseThrow(() -> new RuntimeException("não encontrado"));
+    }
 }
+
