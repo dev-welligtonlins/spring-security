@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS clients (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    login TEXT UNIQUE NOT NULL,
     name TEXT NOT NULL,
+    phone TEXT NOT NULL,
     user_id TEXT NOT NULL,
 
     CONSTRAINT fk_user
@@ -19,7 +21,9 @@ CREATE TABLE IF NOT EXISTS clients (
 
 CREATE TABLE IF NOT EXISTS barbershops (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    login TEXT UNIQUE NOT NULL,
     name TEXT NOT NULL,
+    phone TEXT NOT NULL,
     user_id TEXT NOT NULL,
     
     CONSTRAINT fk_user

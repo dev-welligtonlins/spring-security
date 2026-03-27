@@ -11,9 +11,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
-@Table(name = "clients")
-@Entity(name = "clients")
-public class Client {
+@Table(name = "barbershops")
+@Entity(name = "barbershops")
+public class Barbershop {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;

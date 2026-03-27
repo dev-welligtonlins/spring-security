@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spring_security.dto.AuthenticationDTO;
 import com.example.spring_security.dto.LoginResponseDTO;
+import com.example.spring_security.dto.RegisterBarbershopDTO;
+import com.example.spring_security.dto.RegisterClientDTO;
 import com.example.spring_security.dto.RegisterDTO;
 import com.example.spring_security.model.User;
 import com.example.spring_security.repository.UserRepository;
 import com.example.spring_security.security.TokenService;
+import com.example.spring_security.service.BarbershopService;
+import com.example.spring_security.service.ClientService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +33,11 @@ public class AuthenticationController {
     private UserRepository userRepository;
     @Autowired
     private TokenService tokenService;
+    
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private BarbershopService barbershopService;
 
     @PostMapping("login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody AuthenticationDTO data) {
@@ -50,5 +59,18 @@ public class AuthenticationController {
         userRepository.save(newUser);
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("register/client")    
+    public ResponseEntity<?> register(@RequestBody RegisterClientDTO data) {
+        String token = clientService.newDto(data);
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
+    }
     
+    @PostMapping("register/barbershop")    
+    public ResponseEntity<?> register(@RequestBody RegisterBarbershopDTO data) {
+        String token = barbershopService.newDto(data);
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
+    }
 }

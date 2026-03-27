@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.spring_security.dto.AuthenticationDTO;
 import com.example.spring_security.dto.LoginResponseDTO;
 import com.example.spring_security.dto.RegisterDTO;
+import com.example.spring_security.model.Barbershop;
 import com.example.spring_security.model.Client;
 import com.example.spring_security.model.User;
 import com.example.spring_security.repository.UserRepository;
 import com.example.spring_security.security.TokenService;
+import com.example.spring_security.service.BarbershopService;
 import com.example.spring_security.service.ClientService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,20 +26,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("client/")
-public class ClientController {
+@RequestMapping("barbershop/")
+public class BarbershopController {
     
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private ClientService clientService;
+    private BarbershopService barbershopService;
     @Autowired
     private TokenService tokenService;
 
     @GetMapping("my-perfil")
-    public ResponseEntity<Client> getUserPerfil(@AuthenticationPrincipal User user) {
-        var client = clientService.findByUserId(user.getId());
-        return ResponseEntity.ok(client);
+    public ResponseEntity<Barbershop> getUserPerfil(@AuthenticationPrincipal User user) {
+        var barbershop = barbershopService.findByUserId(user.getId());
+        return ResponseEntity.ok(barbershop);
     }
 
     

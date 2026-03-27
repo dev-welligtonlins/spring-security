@@ -35,8 +35,11 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                     .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/auth/register/client").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/auth/register/barbershop").permitAll()
                     .requestMatchers(HttpMethod.POST, "/services").hasRole("BARBERSHOP")
-                    .requestMatchers(HttpMethod.GET, "/user").hasRole("CLIENT")
+                    .requestMatchers(HttpMethod.GET, "/user/my-perfil").hasRole("CLIENT")
+                    .requestMatchers(HttpMethod.GET, "/barbershop/my-perfil").hasRole("BARBERSHOP")
                     .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

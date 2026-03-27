@@ -1,37 +1,31 @@
 package com.example.spring_security.service;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.http.ResponseEntity;
+ 
+ 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Service; 
 
-import com.example.spring_security.dto.RegisterClientDTO;
-import com.example.spring_security.dto.RegisterDTO;
-import com.example.spring_security.model.Client;
+import com.example.spring_security.dto.RegisterBarbershopDTO; 
+import com.example.spring_security.model.Barbershop; 
 import com.example.spring_security.model.User;
 import com.example.spring_security.model.UserRole;
-import com.example.spring_security.repository.ClientRepository;
+import com.example.spring_security.repository.BarbershopRepository; 
 import com.example.spring_security.repository.UserRepository;
 import com.example.spring_security.security.TokenService;
 
 @Service
-public class ClientService {
+public class BarbershopService {
 
-    private final ClientRepository repo;
+    private final BarbershopRepository repo;
     private final UserRepository userRepository;
     private final TokenService tokenService;
   
-    public ClientService(ClientRepository repo,  UserRepository userRepository,  TokenService tokenService){
+    public BarbershopService(BarbershopRepository repo,  UserRepository userRepository,  TokenService tokenService){
         this.repo = repo;
         this.userRepository = userRepository;
         this.tokenService = tokenService;
     }
 
-    public Client save(Client obj){
+    public Barbershop save(Barbershop obj){
         return this.repo.save(obj);
     }
  
@@ -40,35 +34,35 @@ public class ClientService {
     //     return this.repo.findAll();
     // }
 
-    public Client findById(String id){
+    public Barbershop findById(String id){
         return this.repo.findById(id).orElseThrow(() -> new RuntimeException("não encontrado"));
     }
 
     public void delete(String id){
-        Client obj = this.repo.findById(id).orElseThrow(() -> new RuntimeException("não encontrado"));
+        Barbershop obj = this.repo.findById(id).orElseThrow(() -> new RuntimeException("não encontrado"));
         this.repo.delete(obj);
     }
 
-    public Client findByUserId(String id){
+    public Barbershop findByUserId(String id){
         return this.repo.findByUserId(id).orElseThrow(() -> new RuntimeException("não encontrado"));
     }
 
-    public String newDto(RegisterClientDTO data){
+    public String newDto(RegisterBarbershopDTO data){
         if(this.userRepository.findByLogin(data.login()) != null){
             return "usuário não disponível";
         }
         
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.login(), encryptedPassword, UserRole.CLIENT);
+        User newUser = new User(data.login(), encryptedPassword, UserRole.BARBERSHOP);
         userRepository.save(newUser);
 
-        Client newClient = new Client();
-        newClient.setLogin(data.login());
-        newClient.setName(data.name());
-        newClient.setPhone(data.phone());
-        newClient.setUser(newUser);
+        Barbershop newBarbershop = new Barbershop();
+        newBarbershop.setLogin(data.login());
+        newBarbershop.setName(data.name());
+        newBarbershop.setPhone(data.phone());
+        newBarbershop.setUser(newUser);
 
-        repo.save(newClient);
+        repo.save(newBarbershop);
         return tokenService.generateToken(newUser);
     }
 }

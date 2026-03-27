@@ -36,6 +36,10 @@ public class User implements UserDetails{
     @JsonManagedReference
     private Client client;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private Barbershop barbershop;
+
     // @OneToOne(mappedBy = "barbershops", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonManagedReference
     // private Barbershop barbershop;
