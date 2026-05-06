@@ -3,7 +3,6 @@ package com.example.spring_security.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,36 +15,38 @@ import com.example.spring_security.dto.RegisterDTO;
 import com.example.spring_security.model.User;
 import com.example.spring_security.repository.UserRepository;
 import com.example.spring_security.security.TokenService;
+import com.example.spring_security.service.AuthService;
 import com.example.spring_security.service.BarbershopService;
 import com.example.spring_security.service.ClientService;
+import com.example.spring_security.util.CoockeUtil;
 
+import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 @RequestMapping("auth/")
 public class AuthenticationController {
     
     @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private TokenService tokenService;
     
     @Autowired
     private ClientService clientService;
     @Autowired
     private BarbershopService barbershopService;
+    @Autowired
+    private AuthService authService;
+    @Autowired
+    private CoockeUtil coockeUtil;
 
     @PostMapping("login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody AuthenticationDTO data) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
-        
-        var token = tokenService.generateToken((User) auth.getPrincipal());
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+    public ResponseEntity<Void> login(@RequestBody AuthenticationDTO data, HttpServletResponse response) {
+        String token = authService.login(data);
+        coockeUtil.addAccessToken(response, token);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("register")    
@@ -53,7 +54,7 @@ public class AuthenticationController {
         if(this.userRepository.findByLogin(data.login()) != null)
             return ResponseEntity.badRequest().build();
         
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        String encryptedPassword = new BCryptPasswordEncoder()  .encode(data.password());
         User newUser = new User(data.login(), encryptedPassword, data.role());
 
         userRepository.save(newUser);
@@ -61,16 +62,32 @@ public class AuthenticationController {
     }
 
     @PostMapping("register/client")    
-    public ResponseEntity<?> register(@RequestBody RegisterClientDTO data) {
+    public ResponseEntity<?> register(@RequestBody RegisterClientDTO data, HttpServletResponse response) {
         String token = clientService.newDto(data);
-
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        
+        coockeUtil.addAccessToken(response, token);
+        return ResponseEntity.ok().build();
     }
     
     @PostMapping("register/barbershop")    
     public ResponseEntity<?> register(@RequestBody RegisterBarbershopDTO data) {
         String token = barbershopService.newDto(data);
-
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
+
+
+
+
+    // @GetMapping("/me")
+    // public ResponseEntity<UserResponseDTO> me(Authentication authentication) {
+    //     User user = (User) authentication.getPrincipal();
+
+    //     return ResponseEntity.ok(
+    //         new UserResponseDTO(
+    //             user.getId(),
+    //             user.getLogin(),
+    //             user.getRole().name()
+    //         )
+    //     );
+    // }
 }

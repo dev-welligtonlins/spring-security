@@ -34,7 +34,10 @@ CREATE TABLE IF NOT EXISTS barbershops (
 
 CREATE TABLE IF NOT EXISTS services (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
-    product_name TEXT UNIQUE NOT NULL,
+    service_description TEXT UNIQUE NOT NULL,
+    service_value TEXT UNIQUE NOT NULL,
+    category TEXT UNIQUE NOT NULL,
+    service_active BOOLEAN NOT NULL,
     barbershop_id TEXT NOT NULL,
 
     CONSTRAINT fk_user

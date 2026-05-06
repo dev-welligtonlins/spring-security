@@ -1,13 +1,20 @@
 package com.example.spring_security.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -23,10 +30,16 @@ public class Barbershop {
     private String name;  
     @Column(name = "phone")
     private String phone;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
+    @OneToMany(mappedBy = "barbershop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Service> services = new ArrayList<>(); 
+
+
     
     public String getId() {
         return id;
@@ -57,6 +70,12 @@ public class Barbershop {
     }
     public void setLogin(String login) {
         this.login = login;
+    }
+    public List<Service> getServices() {
+        return services;
+    }
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     

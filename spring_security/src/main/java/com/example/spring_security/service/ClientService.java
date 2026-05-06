@@ -1,16 +1,9 @@
 package com.example.spring_security.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.spring_security.dto.RegisterClientDTO;
-import com.example.spring_security.dto.RegisterDTO;
 import com.example.spring_security.model.Client;
 import com.example.spring_security.model.User;
 import com.example.spring_security.model.UserRole;
