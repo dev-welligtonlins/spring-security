@@ -6,7 +6,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class CoockeUtil {
+public class CookieUtil {
     
     public void addAccessToken(HttpServletResponse response, String token) {
         Cookie cookie = new Cookie("access_token", token);

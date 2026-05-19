@@ -1,0 +1,22 @@
+<h2 class="bold">Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <fieldset>
+        <legend>E-mail</legend>
+        <div>
+            <span>
+                <i class="bi bi-envelope-check-fill"></i>
+            </span>
+            <input type="email" formControlName="login" id="login" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend >Senha</legend>
+        <div >
+            <span>
+                <i class="bi bi-phone-fill"></i>
+            </span>
+            <input type="password" formControlName="password" id="password" required>
+        </div>
+    </fieldset>
+    <button type="submit">Entrar</button>
+</form>

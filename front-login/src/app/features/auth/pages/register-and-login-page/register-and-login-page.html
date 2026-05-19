@@ -1,0 +1,14 @@
+<section>
+    <div >
+        <h2>Bem-vindo</h2>
+        <img  alt="Logo"/>
+    </div>
+    <div >
+        <app-login-form *ngIf="isLogin"></app-login-form>
+        <app-register-form *ngIf="!isLogin" ></app-register-form>
+        
+        <div >{{!isLogin ? 'Já tem conta? Fazer' : 'Não tem uma conta?' }}
+            <span (click)="toggleMode()" >{{ !isLogin ? ' Login' : ' Criar conta' }}</span>
+        </div>
+    </div>
+</section>

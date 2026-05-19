@@ -1,0 +1,54 @@
+<section class="services-container">
+
+  <header class="services-header">
+    <h1>Serviços</h1>
+    <p>Gerencie os serviços da sua barbearia</p>
+  </header>
+
+  @if (services().length > 0) {
+
+    <div class="services-list">
+
+      @for (service of services(); track service.id) {
+
+        <article class="service-card">
+
+          <div class="service-info">
+
+            <h2>
+              {{ service.serviceDescription }}
+            </h2>
+
+          </div>
+
+          <div class="service-meta">
+
+            <span class="price">
+              R$ {{ service.value }}
+            </span>
+
+            <span class="duration">
+              {{ service.category }} cat
+            </span>
+
+          </div>
+
+        </article>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <div class="empty-state">
+
+      <p>
+        Nenhum serviço cadastrado.
+      </p>
+
+    </div>
+
+  }
+
+</section>

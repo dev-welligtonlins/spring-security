@@ -1,0 +1,56 @@
+<h2>Registre-se</h2>
+<form (ngSubmit)="onSubmit()">
+    <fieldset>
+        <legend>Nome Completo</legend>
+        <div>
+            <span >
+                <i class="bi bi-person-fill"></i>
+            </span>
+            <input type="text" id="name" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>E-mail</legend>
+        <div>
+            <span>
+                <i class="bi bi-envelope-check-fill"></i>
+            </span>
+            <input type="email" id="email" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Número</legend>
+        <div >
+            <span >
+                <i class="bi bi-phone-fill"></i>
+            </span>
+            <input type="tel" id="tel" required>
+        </div>
+    </fieldset>
+    <div>
+        <div>
+            <span>password</span>
+        </div>
+    </div>
+    <fieldset>
+        <legend>Senha</legend>
+        <div >
+            <span >
+                <i class="bi bi-keyboard-fill"></i>
+            </span>
+            <input type="password" id="password" placeholder="•••••" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Confirmação de Senha</legend>
+        <div>
+            <span>
+                <i class="bi bi-keyboard-fill"></i>
+            </span>
+            <input type="password" id="password2" placeholder="•••••" required>
+        </div>
+    </fieldset>
+    <button type="submit">Criar conta</button>
+    <!-- <app-modal-register-component #modalRegister></app-modal-register-component> -->
+     
+</form>

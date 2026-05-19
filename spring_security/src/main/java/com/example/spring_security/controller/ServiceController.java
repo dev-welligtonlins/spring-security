@@ -44,17 +44,11 @@ public class ServiceController {
         return ResponseEntity.ok(listService);
     }
 
-    // @GetMapping("my-perfil")
-    // public ResponseEntity<Client> getUserPerfil(@AuthenticationPrincipal User user) {
-    //     var client = clientService.findByUserId(user.getId());
-    //     return ResponseEntity.ok(client);
-    // }
-
-    // @GetMapping("my-perfil")
-    // public ResponseEntity<Client> getUserPerfil(@AuthenticationPrincipal User user) {
-    //     var client = clientService.findByUserId(user.getId());
-    //     return ResponseEntity.ok(client);
-    // }
-
+    @PreAuthorize("hasRole('BARBERSHOP')")
+    @GetMapping("me")
+    public ResponseEntity<List<Service>> meServices(@AuthenticationPrincipal User user) {
+        List<Service> listService = serviceService.meServices(user);
+        return ResponseEntity.ok(listService);
+    }
     
 }

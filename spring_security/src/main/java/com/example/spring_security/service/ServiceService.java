@@ -31,6 +31,12 @@ public class ServiceService {
         return this.serviceRepository.save(newService);
     }
 
+    public List<Service> meServices(User user){
+        Barbershop barbershop = barbershopRepository.findByUserId(user.getId()).orElseThrow(() -> new RuntimeException("Barbearia não encontrado!"));
+        return serviceRepository.findByBarbershopId(barbershop.getId())
+        .orElseThrow(() -> new RuntimeException("serviço não encontrado"));
+    }
+
     public void delete(String id){
         Service obj = this.serviceRepository.findById(id).orElseThrow(() -> new RuntimeException("não encontrado"));
         this.serviceRepository.delete(obj);

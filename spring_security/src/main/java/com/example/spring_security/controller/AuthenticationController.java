@@ -3,6 +3,7 @@ package com.example.spring_security.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,13 +13,14 @@ import com.example.spring_security.dto.LoginResponseDTO;
 import com.example.spring_security.dto.RegisterBarbershopDTO;
 import com.example.spring_security.dto.RegisterClientDTO;
 import com.example.spring_security.dto.RegisterDTO;
+import com.example.spring_security.dto.UserResponseDTO;
 import com.example.spring_security.model.User;
 import com.example.spring_security.repository.UserRepository;
 import com.example.spring_security.security.TokenService;
 import com.example.spring_security.service.AuthService;
 import com.example.spring_security.service.BarbershopService;
 import com.example.spring_security.service.ClientService;
-import com.example.spring_security.util.CoockeUtil;
+import com.example.spring_security.util.CookieUtil;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -40,12 +42,12 @@ public class AuthenticationController {
     @Autowired
     private AuthService authService;
     @Autowired
-    private CoockeUtil coockeUtil;
+    private CookieUtil cookieUtil;
 
     @PostMapping("login")
     public ResponseEntity<Void> login(@RequestBody AuthenticationDTO data, HttpServletResponse response) {
         String token = authService.login(data);
-        coockeUtil.addAccessToken(response, token);
+        cookieUtil.addAccessToken(response, token);
         return ResponseEntity.ok().build();
     }
 
@@ -65,7 +67,7 @@ public class AuthenticationController {
     public ResponseEntity<?> register(@RequestBody RegisterClientDTO data, HttpServletResponse response) {
         String token = clientService.newDto(data);
         
-        coockeUtil.addAccessToken(response, token);
+        cookieUtil.addAccessToken(response, token);
         return ResponseEntity.ok().build();
     }
     
@@ -78,16 +80,17 @@ public class AuthenticationController {
 
 
 
-    // @GetMapping("/me")
-    // public ResponseEntity<UserResponseDTO> me(Authentication authentication) {
-    //     User user = (User) authentication.getPrincipal();
-
-    //     return ResponseEntity.ok(
-    //         new UserResponseDTO(
-    //             user.getId(),
-    //             user.getLogin(),
-    //             user.getRole().name()
-    //         )
-    //     );
-    // }
+    @GetMapping("me")
+    public ResponseEntity<UserResponseDTO> me(@AuthenticationPrincipal User user) {
+        if (user == null) {
+            return ResponseEntity.status(401).build();
+        }
+        return ResponseEntity.ok(
+            new UserResponseDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getRole().name()
+            )
+        );
+    }
 }
