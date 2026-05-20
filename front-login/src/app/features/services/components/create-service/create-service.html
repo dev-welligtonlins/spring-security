@@ -1,0 +1,31 @@
+<h2 class="bold">Login</h2>
+<form [formGroup]="serviceForm" (ngSubmit)="createService()">
+    <fieldset>
+        <legend>Descricacao</legend>
+        <div>
+            <span>
+                <i class="bi bi-envelope-check-fill"></i>
+            </span>
+            <input type="text" formControlName="serviceDescription" id="serviceDescription" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend >Valor</legend>
+        <div >
+            <span>
+                <i class="bi bi-phone-fill"></i>
+            </span>
+            <input type="number" formControlName="value" id="value" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend >Categoria</legend>
+        <div >
+            <span>
+                <i class="bi bi-phone-fill"></i>
+            </span>
+            <input type="text" formControlName="category" id="category" required>
+        </div>
+    </fieldset>
+    <button type="submit">Entrar</button>
+</form>
