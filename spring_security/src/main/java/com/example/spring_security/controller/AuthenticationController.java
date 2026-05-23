@@ -72,13 +72,12 @@ public class AuthenticationController {
     }
     
     @PostMapping("register/barbershop")    
-    public ResponseEntity<?> register(@RequestBody RegisterBarbershopDTO data) {
+    public ResponseEntity<?> register(@RequestBody RegisterBarbershopDTO data, HttpServletResponse response) {
         String token = barbershopService.newDto(data);
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+
+        cookieUtil.addAccessToken(response, token);
+        return ResponseEntity.ok().build();
     }
-
-
-
 
     @GetMapping("me")
     public ResponseEntity<UserResponseDTO> me(@AuthenticationPrincipal User user) {

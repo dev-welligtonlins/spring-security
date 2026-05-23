@@ -1,18 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../model/user.model';
+
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthRedirectService {
 
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   redirect(user: User): void {
-
     switch (user.role) {
-
       case 'CLIENT':
         this.router.navigate(['/client']);
         break;

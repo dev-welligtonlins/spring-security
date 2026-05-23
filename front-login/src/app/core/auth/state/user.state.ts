@@ -1,35 +1,43 @@
 import { Injectable, signal, computed } from '@angular/core';
 
-import { User } from '../model/user.model';
+import { User } from '../models/user.model';
 
+@Injectable({
+  providedIn: 'root'
+})
 @Injectable({
   providedIn: 'root'
 })
 export class UserState {
 
-    user = signal<User | null>(null);
+  private readonly _user =
+    signal<User | null>(null);
 
-    isAuthenticated = computed(() => !!this.user());
+  readonly user =
+    this._user.asReadonly();
 
-    isClient = computed(() =>
-      this.user()?.role === 'CLIENT'
+  readonly isAuthenticated =
+    computed(() =>
+      !!this._user()
     );
 
-    isBarbershop = computed(() =>
-      this.user()?.role === 'BARBERSHOP'
+  readonly isClient =
+    computed(() =>
+      this._user()?.role === 'CLIENT'
     );
 
-    setUser(user: User | null) {
-      this.user.set(user);
-    }
+  readonly isBarbershop =
+    computed(() =>
+      this._user()?.role === 'BARBERSHOP'
+    );
 
-    clear() {
-      this.user.set(null);
-    }
+  setUser(user: User) {
 
+    this._user.set(user);
+  }
 
-    getUser(): User | null {
-        return this.user();
-    }
+  clear() {
 
+    this._user.set(null);
+  }
 }

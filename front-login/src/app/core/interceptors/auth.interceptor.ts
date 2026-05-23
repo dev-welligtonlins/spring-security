@@ -1,15 +1,16 @@
-import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+  HttpInterceptorFn
 
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
+} from '@angular/common/http';
 
-    const cloned = req.clone({
-      withCredentials: true
-    });
+export const authInterceptor: 
+  HttpInterceptorFn = (
+    req,  next
+  ) => {
+  const cloned = req.clone({
+    withCredentials: true
+  });
 
-    return next.handle(cloned);
-  }
-}
+  return next(cloned);
+};

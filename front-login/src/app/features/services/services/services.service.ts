@@ -29,8 +29,6 @@ export class ServicesService {
         );
     }
 
-
-
     // logout() {
     // }
 

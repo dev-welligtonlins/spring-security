@@ -1,48 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../../core/auth/service/auth.service';
-import { LoginRequest } from '../../../../core/auth/model/LoginRequest';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { switchMap } from 'rxjs';
-import { AuthRedirectService } from '../../../../core/auth/service/authRedirect.service';
+import { Component, inject } from "@angular/core";
+import { AuthService } from "../../../../core/auth/services/auth.service";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { LoginRequest } from "../../../../core/auth/models/LoginRequest";
 
-@Component({
-  selector: 'app-login-form',
+@Component({ 
+  selector: 'app-login-form', 
+  standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './login-form.html',
+  templateUrl: './login-form.html', 
   styleUrl: './login-form.scss',
-})
-export class LoginForm implements OnInit {
-  loginForm!: FormGroup;
+ })
+export class LoginForm {
 
-  constructor(
-    private authService: AuthService, 
-    private authRedirectService: AuthRedirectService, 
-    private fb: FormBuilder) {}
+  private authService = inject(AuthService);
 
-  ngOnInit() {
-    this.loginForm = this.fb.group({
-      login: '',
-      password: ''
-    })
-  }
+  private fb = inject(FormBuilder);
 
+  loginForm = this.fb.nonNullable.group({
+      login: ['', Validators.required],
+      password: ['', Validators.required]
+    });
 
   login() {
+
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
-    const data: LoginRequest = this.loginForm.value;
-    this.authService.login(data).pipe(
-      switchMap(() => this.authService.loadUser())
-    ).subscribe({
-      next: (user) => {
-        this.authRedirectService.redirect(user);
-      },
-      error: (err) => {
-        console.error('Erro login', err);
-      }
-    });
+    const data: (LoginRequest) = this.loginForm.getRawValue();
+
+    this.authService
+      .login(data)
+      .subscribe({
+
+        error: err => {
+
+          console.error(
+            'Erro login',
+            err
+          );
+        }
+      });
   }
 }
