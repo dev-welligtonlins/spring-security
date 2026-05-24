@@ -1,31 +1,33 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/authRole.guard';
+import { Main } from './shared/layout/main/main';
 
 export const routes: Routes = [
     {
-        path: 'register-login',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
+        path: 'auth',
+        loadChildren: () => import('./features/auth/routes/auth.routes')
+            .then(m => m.AUTH_ROUTES)
     },
     {
-    path: 'register',
-    loadComponent: () => import('./features/auth/pages/register-and-login-page/register-and-login-page').then(m => m.RegisterAndLoginPage)
-    },
-    {
-    path: 'barbershop',
-    loadComponent: () => import('./features/barbershop/pages/home-page/home-page').then(m => m.HomePage)
+        path: '',
+        component: Main,
+        children: [
+            {
+                path: 'barbershop',
+
+                loadChildren: () =>
+                    import('./features/barbershop/routes/barbershop.routes')
+                        .then(m => m.BARBERSHOP_ROUTES)
+            },
+
+            {
+                path: 'services',
+
+                loadChildren: () =>
+                    import('./features/services/routes/service.routes')
+                        .then(m => m.SERVICES_ROUTES)
+            }]
     }
-,
-    {
-    path: 'services',
-    loadComponent: () => import('./features/services/pages/services-page/services-page').then(m => m.ServicesPage)
-    }
-    // ,
-    // {
-    // path: 'barbershop', component: BarbershopComponent,
-    // canActivate: [authGuard, roleGuard],
-    // data: { roles: ['BARBERSHOP'] }
-    // }
 ];
 
