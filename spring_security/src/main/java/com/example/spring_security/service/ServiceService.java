@@ -37,7 +37,7 @@ public class ServiceService {
         .orElseThrow(() -> new RuntimeException("serviço não encontrado"));
     }
 
-    public void delete(String id){
+    public void removeService(String id){
         Service obj = this.serviceRepository.findById(id).orElseThrow(() -> new RuntimeException("não encontrado"));
         this.serviceRepository.delete(obj);
     }

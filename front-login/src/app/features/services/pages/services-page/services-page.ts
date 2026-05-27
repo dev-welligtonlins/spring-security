@@ -37,6 +37,22 @@ export class ServicesPage implements OnInit {
     });
   }
 
-  // createService()
+  remove(id: string) {
+
+    this.servicesService.remove(id).subscribe({
+        next: () => {
+          this.servicesState.removeService(id);
+        },
+
+        error: err => {
+          console.error('Erro ao remover', err);
+        }
+      });
+  }
 
 }
+
+
+
+
+

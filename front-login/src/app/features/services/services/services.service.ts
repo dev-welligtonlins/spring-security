@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { Service } from "../models/service.model";
@@ -13,7 +13,7 @@ export class ServicesService {
     
     private API = 'http://localhost:8080/services';
  
-    constructor(private http: HttpClient){}
+    private http = inject(HttpClient);
 
     meServices(): Observable<Service[]> {
         return this.http.get<Service[]>(
@@ -29,6 +29,12 @@ export class ServicesService {
         );
     }
 
+    remove(id: string): Observable<void>{
+        return this.http.delete<void>(
+            `${this.API}/remove/${id}`,
+            {withCredentials: true}
+        );
+    }
     // logout() {
     // }
 

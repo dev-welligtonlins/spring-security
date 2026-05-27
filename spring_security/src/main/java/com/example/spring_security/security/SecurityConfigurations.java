@@ -44,6 +44,7 @@ public class SecurityConfigurations {
                     .requestMatchers(HttpMethod.POST, "/auth/register/barbershop").permitAll()
                     .requestMatchers(HttpMethod.GET, "/auth/me").authenticated()
                     .requestMatchers(HttpMethod.POST, "/services/new").hasRole("BARBERSHOP")
+                    .requestMatchers(HttpMethod.DELETE, "/services/**").hasRole("BARBERSHOP")
                     .requestMatchers(HttpMethod.GET, "/services/me").hasRole("BARBERSHOP")
                     .requestMatchers(HttpMethod.GET, "/services/**").hasRole("CLIENT")
                     .requestMatchers(HttpMethod.GET, "/user/my-perfil").hasRole("CLIENT")
