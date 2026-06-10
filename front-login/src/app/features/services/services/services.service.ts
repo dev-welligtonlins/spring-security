@@ -29,6 +29,13 @@ export class ServicesService {
         );
     }
 
+    update(service_id: string, data: Service): Observable<Service> {
+        return this.http.put<Service>(
+            `${this.API}/update/${service_id}`, data, 
+            {withCredentials: true}
+        );
+    }
+
     remove(id: string): Observable<void>{
         return this.http.delete<void>(
             `${this.API}/remove/${id}`,

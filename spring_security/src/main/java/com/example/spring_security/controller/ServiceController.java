@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spring_security.dto.NewServiceDTO;
+import com.example.spring_security.dto.UpdateServiceDTO;
 import com.example.spring_security.model.Client;
 import com.example.spring_security.model.Service;
 import com.example.spring_security.model.User;
@@ -36,6 +38,12 @@ public class ServiceController {
     @PostMapping("create")
     public ResponseEntity<Service> insertService(@AuthenticationPrincipal User user, @RequestBody NewServiceDTO data) {
         var client = serviceService.insertService(user, data);
+        return ResponseEntity.ok(client);
+    }
+    @PreAuthorize("hasRole('BARBERSHOP')")
+    @PutMapping("update/{serviceId}")
+    public ResponseEntity<Service> updateService(@AuthenticationPrincipal User user, @PathVariable("serviceId") String serviceId, @RequestBody UpdateServiceDTO data) {
+        var client = serviceService.updateService(user, serviceId, data);
         return ResponseEntity.ok(client);
     }
 

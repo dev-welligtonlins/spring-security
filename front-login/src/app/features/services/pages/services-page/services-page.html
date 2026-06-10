@@ -38,6 +38,9 @@
               <button type="button" (click)="remove(service.id)">Remove 
                 <i class="bi bi-trash"></i>
               </button>
+              <button type="button" (click)="servicesState.openUpdateModal(service)">Alterar 
+                <i class="bi bi-trash"></i>
+              </button>
 
             </div>
 
@@ -82,3 +85,11 @@
   }
 
 </section>
+
+@if(
+  servicesState.modalType() === serviceModal.UPDATE
+){
+
+  <app-update-service />
+
+}

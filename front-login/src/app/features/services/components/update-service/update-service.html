@@ -1,5 +1,5 @@
 <h2 class="bold">Login</h2>
-<form [formGroup]="serviceForm" (ngSubmit)="createService()">
+<form [formGroup]="serviceForm" (ngSubmit)="updateService()">
     <fieldset>
         <legend>Descricacao</legend>
         <div>
@@ -27,5 +27,5 @@
             <input type="text" formControlName="category" id="category" required>
         </div>
     </fieldset>
-    <button type="submit">Criar</button>
+    <button type="submit">Salvar</button>
 </form>

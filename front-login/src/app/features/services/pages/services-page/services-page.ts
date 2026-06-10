@@ -4,24 +4,24 @@ import { Service } from '../../models/service.model';
 import { CommonModule } from '@angular/common';
 import { CreateService } from '../../components/create-service/create-service';
 import { ServicesState } from '../../state/services.state';
+import { ServiceEnumModal } from '../../models/service-enum.model';
+import { UpdateService } from '../../components/update-service/update-service';
 
 @Component({
   selector: 'app-services-page',
   standalone: true,
-  imports: [CommonModule, CreateService],
+  imports: [CommonModule, CreateService, UpdateService],
   templateUrl: './services-page.html',
   styleUrl: './services-page.scss',
 })
 export class ServicesPage implements OnInit {
 
   private readonly servicesService = inject(ServicesService);
-
-  private readonly servicesState = inject(ServicesState);
-
+  protected readonly servicesState = inject(ServicesState);
+  protected readonly serviceModal = ServiceEnumModal;
   readonly services = this.servicesState.services;
 
   ngOnInit(): void {
-
     this.loadServices();
   }
 
