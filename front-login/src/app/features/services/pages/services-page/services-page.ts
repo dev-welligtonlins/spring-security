@@ -27,7 +27,7 @@ export class ServicesPage implements OnInit {
 
   loadServices(): void {
 
-    this.servicesService.meServices().subscribe({
+    this.servicesService.loadServices().subscribe({
       next: (services) => {
         this.servicesState.setServices(services);
       },

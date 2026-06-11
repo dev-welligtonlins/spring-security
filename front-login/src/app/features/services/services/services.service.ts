@@ -1,48 +1,28 @@
 import { inject, Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, tap } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { Service } from "../models/service.model";
+import { ServicesApi } from "../api/services.api";
 import { CreateServiceDTO } from "../models/create-service.model";
-
-
+import { UpdateServiceDTO } from "../models/update-service.model";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ServicesService {
-    
-    private API = 'http://localhost:8080/services';
- 
-    private http = inject(HttpClient);
 
-    meServices(): Observable<Service[]> {
-        return this.http.get<Service[]>(
-            `${this.API}/me`, 
-            {withCredentials: true}
-        );
+    private readonly serviceApi = inject(ServicesApi);
+
+    loadServices() {
+        return this.serviceApi.meServices();
     }
 
-    create(data: CreateServiceDTO): Observable<Service> {
-        return this.http.post<Service>(
-            `${this.API}/create`, data, 
-            {withCredentials: true}
-        );
+    create(data: CreateServiceDTO) {
+        return this.serviceApi.create(data);
     }
 
-    update(service_id: string, data: Service): Observable<Service> {
-        return this.http.put<Service>(
-            `${this.API}/update/${service_id}`, data, 
-            {withCredentials: true}
-        );
+    update(service_id: string, data: UpdateServiceDTO) {
+        return this.serviceApi.update(service_id, data);
     }
 
-    remove(id: string): Observable<void>{
-        return this.http.delete<void>(
-            `${this.API}/remove/${id}`,
-            {withCredentials: true}
-        );
+    remove(service_id: string) {
+        return this.serviceApi.remove(service_id);
     }
-    // logout() {
-    // }
-
 }

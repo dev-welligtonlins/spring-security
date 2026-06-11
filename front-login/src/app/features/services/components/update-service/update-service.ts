@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ServicesState } from '../../state/services.state';
 import { ServicesService } from '../../services/services.service';
@@ -11,33 +11,30 @@ import { Service } from '../../models/service.model';
   templateUrl: './update-service.html',
   styleUrl: './update-service.scss',
 })
-export class UpdateService implements OnInit {
-  serviceForm!: FormGroup;
+export class UpdateService {
+
   protected readonly servicesState = inject(ServicesState);
+  private readonly servicesService = inject(ServicesService);
+  private readonly fb = inject(FormBuilder);
 
-  constructor(
-    private servicesService: ServicesService,
-    private fb: FormBuilder) { }
+  serviceForm = this.fb.nonNullable.group({
+    serviceDescription: [''],
+    value: [0.0],
+    category: ['']
+  });
 
-  ngOnInit() {
-    // form iniciando
-    this.serviceForm = this.fb.group({
-      serviceDescription: '',
-      value: 0.0,
-      category: ''
-    });
+  constructor() { 
+    effect(() => {
 
-    const service = this.servicesState.selectedService();
-    // precisamos fazer uma verificação de verdade aqui!
-    if (!service) {
-      return;
-    }
+      const service = this.servicesState.selectedService();
 
-    // o form carrega os dados do service
-    this.serviceForm.patchValue({
-      serviceDescription: service.serviceDescription,
-      value: service.value,
-      category: service.category
+      if (!service) { return; }
+
+      this.serviceForm.patchValue({
+        serviceDescription: service.serviceDescription,
+        value: service.value,
+        category: service.category
+      });
     });
 
   }
