@@ -8,88 +8,96 @@
     Gerencie os serviços da sua barbearia
   </p>
 
-  <app-create-service />
 
+  <button type="button" (click)="servicesState.openCreateModal()">Novo
+    <i class="bi bi-trash"></i>
+  </button>
+  @if(
+  servicesState.modalType() === serviceModal.CREATE
+  ){
+
+  <app-create-service />
+  }
   @if (services().length > 0) {
 
-    <div>
+  <div>
 
-      @for (
-        service of services();
-        track service.id
-      ) {
+    @for (
+    service of services();
+    track service.id
+    ) {
 
-        <article>
+    <article>
 
-          <div>
+      <div>
 
-            <div>
+        <div>
 
-              <i class="bi bi-scissors"></i>
+          <i class="bi bi-scissors"></i>
 
-              <h2>
-                {{ service.serviceDescription }}
-              </h2>
+          <h2>
+            {{ service.serviceDescription }}
+          </h2>
 
-            </div>
+        </div>
 
-            <div>
+        <div>
 
-              <button type="button" (click)="remove(service.id)">Remove 
-                <i class="bi bi-trash"></i>
-              </button>
-              <button type="button" (click)="servicesState.openUpdateModal(service)">Alterar 
-                <i class="bi bi-trash"></i>
-              </button>
+          <button type="button" (click)="remove(service.id)">Remove
+            <i class="bi bi-trash"></i>
+          </button>
+          <button type="button" (click)="servicesState.openUpdateModal(service)">Alterar
+            <i class="bi bi-trash"></i>
+          </button>
 
-            </div>
+        </div>
 
-          </div>
+      </div>
 
-          <div>
+      <div>
 
-            <span>
-              <i class="bi bi-cash"></i>
+        <span>
+          <i class="bi bi-cash"></i>
 
-              R$ {{ service.value }}
-            </span>
+          R$ {{ service.value }}
+        </span>
 
-            <span>
+        <span>
 
-              <i class="bi bi-tag"></i>
+          <i class="bi bi-tag"></i>
 
-              {{ service.category }}
+          {{ service.category }}
 
-            </span>
+        </span>
 
-          </div>
+      </div>
 
-        </article>
+    </article>
 
-      }
+    }
 
-    </div>
+  </div>
 
   } @else {
 
-    <div>
+  <div>
 
-      <i class="bi bi-exclamation-circle"></i>
+    <i class="bi bi-exclamation-circle"></i>
 
-      <p>
-        Nenhum serviço cadastrado.
-      </p>
+    <p>
+      Nenhum serviço cadastrado.
+    </p>
 
-    </div>
+  </div>
 
   }
 
 </section>
 
 @if(
-  servicesState.modalType() === serviceModal.UPDATE
+servicesState.modalType() === serviceModal.UPDATE
 ){
 
-  <app-update-service />
+<app-update-service />
 
 }

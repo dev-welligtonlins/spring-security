@@ -6,26 +6,21 @@ import { ServicesState } from '../../state/services.state';
 
 @Component({
   selector: 'app-create-service',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './create-service.html',
   styleUrl: './create-service.scss',
 })
-export class CreateService implements OnInit {
-  serviceForm!: FormGroup;
-  private readonly servicesState = inject(ServicesState);
-  
-  constructor(
-    private servicesService: ServicesService, 
-    private fb: FormBuilder) {}
+export class CreateService {
+  protected readonly servicesState = inject(ServicesState);
+  private readonly servicesService = inject(ServicesService);
+  private readonly fb = inject(FormBuilder);
 
-  ngOnInit() {
-    this.serviceForm = this.fb.group({
-      serviceDescription: '',
-      value: 0.0,
-      category: ''
-    })
-  }
-
+  serviceForm = this.fb.nonNullable.group({
+    serviceDescription: [''],
+    value: [0.0],
+    category: ['']
+  });
 
   createService() {
     if (this.serviceForm.invalid) {
@@ -33,12 +28,14 @@ export class CreateService implements OnInit {
       return;
     }
 
-    const data: CreateServiceDTO = this.serviceForm.value;
+    const data: CreateServiceDTO = this.serviceForm.getRawValue();
     this.servicesService.create(data).pipe(
 
     ).subscribe({
       next: service => {
         this.servicesState.addService(service);
+        this.servicesState.closeModal();
+
       },
       error: (err) => {
         console.error('Erro ao criar serviço!', err);
