@@ -1,14 +1,14 @@
-<section>
-    <div >
+<section class="section-left">
+    <div>
         <h2>Bem-vindo</h2>
-        <img  alt="Logo"/>
+        <img src="assets/img/bigode.png" alt="Logo" class="logo" />
     </div>
-    <div >
+    <div class="section-right">
         <app-login-form *ngIf="isLogin"></app-login-form>
-        <app-register-form *ngIf="!isLogin" ></app-register-form>
-        
-        <div >{{!isLogin ? 'Já tem conta? Fazer' : 'Não tem uma conta?' }}
-            <span (click)="toggleMode()" >{{ !isLogin ? ' Login' : ' Criar conta' }}</span>
+        <app-register-form *ngIf="!isLogin"></app-register-form>
+
+        <div class="signup-link">{{!isLogin ? 'Já tem conta? Fazer' : 'Não tem uma conta?' }}
+            <span (click)="toggleMode()" class="create-account">{{ !isLogin ? ' Login' : ' Criar conta' }}</span>
         </div>
     </div>
 </section>
