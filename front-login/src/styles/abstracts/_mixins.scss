@@ -1,0 +1,29 @@
+// _mixins.scss
+
+// Evita repetir media queries.
+
+// @use './breakpoints' as bp;
+
+// @mixin tablet {
+
+//   @media (min-width: bp.$tablet) {
+
+//     @content;
+//   }
+// }
+
+// @mixin laptop {
+
+//   @media (min-width: bp.$laptop) {
+
+//     @content;
+//   }
+// }
+
+// @mixin desktop {
+
+//   @media (min-width: bp.$desktop) {
+
+//     @content;
+//   }
+// }
