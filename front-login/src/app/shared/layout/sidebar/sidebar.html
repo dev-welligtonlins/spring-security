@@ -1,24 +1,17 @@
 <aside>
 
   <div>
-    <span> {{ user()?.login }} </span>
+    <span>Olá, {{ user()?.login }} </span>
   </div>
 
   <nav>
     @if(userState.isBarbershop()) {
-      <a routerLink="/barbershop" routerLinkActive="active">
-        Dashboard
-      </a>
-      <a routerLink="/services" routerLinkActive="active">
-        Serviços
-      </a>
-
+      <a routerLink="/barbershop" routerLinkActive="active">Home</a>
+      <a routerLink="/services" routerLinkActive="active">Serviços</a>
     }
 
     @if(userState.isClient()) {
-      <a routerLink="/client" routerLinkActive="active" >
-        Dashboard
-      </a>
+      <a routerLink="/client" routerLinkActive="active" >Dashboard</a>
     }
 
   </nav>

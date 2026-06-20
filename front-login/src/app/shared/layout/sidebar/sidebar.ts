@@ -11,7 +11,7 @@ import { UserState } from '../../../core/auth/state/user.state';
 })
 export class SideBar {
 
-  protected userState = inject(UserState);
+  protected readonly userState = inject(UserState);
+  protected readonly user = this.userState.user;
 
-  user = this.userState.user;
 }
