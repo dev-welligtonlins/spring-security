@@ -1,6 +1,7 @@
 export interface Service {
     id: string;
     serviceDescription: string;
+    duration: number;
     value: number;
-    category: string
+    serviceCategory: string
 }

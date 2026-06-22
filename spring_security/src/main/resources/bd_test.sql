@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS barbershop_schedules (
 	lunch_start_time TIME,
 	lunch_end_time TIME,
 	closing_time TIME NOT NULL,
-	barbershop_id INT NOT NULL,
+	barbershop_id TEXT NOT NULL,
 
 	CONSTRAINT fk_barbershop FOREIGN KEY (barbershop_id)
 		REFERENCES barbershops(id) ON DELETE CASCADE
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS address (
 	complement VARCHAR(50),
 	city VARCHAR(40),
 	address_state VARCHAR(2),
-	barbershop_id INT NOT NULL,
+	barbershop_id TEXT NOT NULL,
 
 	CONSTRAINT fk_barbershop FOREIGN KEY (barbershop_id)
 		REFERENCES barbershops(id) ON DELETE CASCADE
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS accommodations (
 	parking BOOLEAN NOT NULL,
 	bath BOOLEAN NOT NULL,
 	air_conditioner BOOLEAN NOT NULL,
-	barbershop_id INT NOT NULL,
+	barbershop_id TEXT NOT NULL,
 
 	CONSTRAINT fk_barbershop
 		FOREIGN KEY (barbershop_id)
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS barbers (
 	is_hair BOOLEAN NOT NULL,
 	is_beard BOOLEAN NOT NULL,
 	barber_active BOOLEAN NOT NULL,
-	barbershop_id INT NOT NULL,
+	barbershop_id TEXT NOT NULL,
 	
 	CONSTRAINT fk_barbershop FOREIGN KEY (barbershop_id)
 		REFERENCES barbershops(id) ON DELETE CASCADE
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS services (
 	service_value FLOAT NOT NULL,
 	category VARCHAR(45) NOT NULL,
 	service_active BOOLEAN NOT NULL,
-	barbershop_id INT NOT NULL,
+	barbershop_id TEXT NOT NULL,
 	
 	CONSTRAINT fk_barbershop FOREIGN KEY (barbershop_id)
 		REFERENCES barbershops(id) ON DELETE CASCADE
@@ -109,11 +109,11 @@ CREATE TABLE IF NOT EXISTS services (
 -- AGENDAMENTO DO CLIENTE E HORÁRIO
 CREATE TABLE IF NOT EXISTS appointments (
 	id TEXT PRIMARY KEY UNIQUE NOT NULL,
-	client_name VARCHAR(100) ,
+	client_name VARCHAR(100),
 	appointment_time TIMESTAMP NOT NULL,
 	appointment_status VARCHAR(25) NOT NULL,
 	value_total FLOAT NOT NULL,
-	barbershop_id INT NOT NULL,
+	barbershop_id TEXT NOT NULL,
 
 	CONSTRAINT fk_barbershop FOREIGN KEY (barbershop_id)
 		REFERENCES barbershops(id) ON DELETE CASCADE
@@ -123,9 +123,9 @@ CREATE TABLE IF NOT EXISTS appointments (
 CREATE TABLE IF NOT EXISTS service_appointments (
 	id TEXT PRIMARY KEY UNIQUE NOT NULL,
 	service_time TIME NOT NULL,
-	barber_id INT,
-	service_id INT,
-	appointment_id INT NOT NULL,
+	barber_id TEXT,
+	service_id TEXT,
+	appointment_id TEXT NOT NULL,
 	
 	CONSTRAINT fk_barber FOREIGN KEY (barber_id)
 		REFERENCES barbers(id) ON DELETE CASCADE,
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS service_appointments (
 -- PAGAMENTOS
 CREATE TABLE IF NOT EXISTS payments (
 	id TEXT PRIMARY KEY UNIQUE NOT NULL,
-	appointment_id INT NOT NULL,
+	appointment_id TEXT NOT NULL,
 	payment_value FLOAT NOT NULL,
 	payment_method VARCHAR(15) NOT NULL,
 	payment_status BOOLEAN NOT NULL,

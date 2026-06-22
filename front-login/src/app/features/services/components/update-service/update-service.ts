@@ -19,8 +19,9 @@ export class UpdateService {
 
   serviceForm = this.fb.nonNullable.group({
     serviceDescription: [''],
+    duration: [0.0],
     value: [0.0],
-    category: ['']
+    serviceCategory: ['']
   });
 
   constructor() { 
@@ -32,8 +33,9 @@ export class UpdateService {
 
       this.serviceForm.patchValue({
         serviceDescription: service.serviceDescription,
+        duration: service.duration,
         value: service.value,
-        category: service.category
+        serviceCategory: service.serviceCategory
       });
     });
 

@@ -1,5 +1,6 @@
 export interface CreateServiceDTO {
     serviceDescription: string;
+    duration: number;
     value: number;
-    category: string
+    serviceCategory: string
 }

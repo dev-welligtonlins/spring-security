@@ -18,8 +18,9 @@ export class CreateService {
 
   serviceForm = this.fb.nonNullable.group({
     serviceDescription: [''],
+    duration: [20.0],
     value: [0.0],
-    category: ['']
+    serviceCategory: ['']
   });
 
   createService() {
