@@ -1,5 +1,4 @@
 <header class="navbar">
-
   <div class="search-bar">
     <form (submit)="$event.preventDefault()">
       <div class="input-icon w-10">
@@ -11,9 +10,7 @@
 
     <div class="profile-foto">
       <img [src]="" class="profile-img me-3">
-      <span class="profile-nome">
-       
-      </span>
+      <span class="profile-nome"></span>
 
       <div class="user-info">
         <span>Olá, {{ user()?.login }} </span>
