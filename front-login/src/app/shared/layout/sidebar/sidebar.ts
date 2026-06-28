@@ -11,6 +11,11 @@ import { UserState } from '../../../core/auth/state/user.state';
 })
 export class SideBar {
 
+   perfil = {
+    nome: 'Faca & Bigode',
+    fotoUrl: 'caminho/para/sua/imagem.jpg' // URL real da imagem
+  };
+
   protected readonly userState = inject(UserState);
   protected readonly user = this.userState.user;
 

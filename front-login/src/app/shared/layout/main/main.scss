@@ -1,0 +1,11 @@
+.layout {
+  display: flex;
+  background: #141519;
+}
+
+.content {
+  margin-left: 260px; /* mesma largura da sidebar */
+  width: calc(100%);
+  min-height: 100vh;
+  background: #232323;
+}
