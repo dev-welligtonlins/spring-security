@@ -1,22 +1,24 @@
-<h2 class="bold">Login</h2>
 <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <fieldset>
-        <legend>E-mail</legend>
-        <div>
-            <span>
-                <i class="bi bi-envelope-check-fill"></i>
-            </span>
-            <input type="email" formControlName="login" id="login" required>
-        </div>
-    </fieldset>
-    <fieldset>
-        <legend >Senha</legend>
-        <div >
-            <span>
-                <i class="bi bi-phone-fill"></i>
-            </span>
-            <input type="password" formControlName="password" id="password" required>
-        </div>
-    </fieldset>
-    <button type="submit">Entrar</button>
+    <div class="bigode">
+        <img src="assets/img/bigode3D.png" alt="Logo" class="logo" />
+    </div>
+    <p class="text-login">Bem vindo ao Faca & bigode</p>
+
+    <div>
+        <label for="login">Email:</label>
+         <input type="email" formControlName="login" id="login" required>
+    </div>
+
+    <div>
+        <label for="pass">Senha:</label>
+        <input type="password" formControlName="password" id="password" required>
+    </div>
+    <button class="entrar" type="submit">Entrar</button>
+
+    <div class="google">
+        <span class="ou">ou</span>
+        <button class="logar" type="button"><i class="bi bi-google"></i>
+            Continuar com Google
+        </button>
+    </div>
 </form>

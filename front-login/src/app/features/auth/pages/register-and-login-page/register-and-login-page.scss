@@ -1,0 +1,60 @@
+.section-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: 70vh;// background-image: url('/assets/img/fundo-login.png');
+    background-color: #7f62f500;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 45px 0px 0px 45px;
+
+    h6 {
+        color: #f5f5f5;
+        font-size: 12px;
+        margin-bottom: 40px;
+        // font-family: fonts.$font-primary;
+        // font-weight: fonts.$font-weight-bold;
+
+    }
+
+    img {
+        width: 350px;
+        height: auto;
+    }
+}
+
+.section-right {
+    width: 25%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    background-color: #141519;
+    border-radius: 10px 10px 10px 10px;
+
+    h2 {
+        margin-top: 4%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        // font-family: fonts.$font-primary;
+        // font-weight: fonts.$font-weight-bold;
+        color: white;
+        margin-left: 2rem;
+    }
+
+    img {
+        display: flex;
+        flex-direction: center;
+        justify-content: center;
+        align-items: center;
+        right: 50px;
+        left: 50px;
+        width: 110px;
+        height: 110px;
+        margin-bottom: -2%;
+    }
+}

@@ -1,0 +1,45 @@
+.bigode {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: #5555555f;
+    border-radius: 10px 10px 10px 10px;
+
+    img {
+        align-items: center;
+        width: 150px;
+        height: auto;
+    }
+}
+
+// div da linha or até o final de section-right de
+
+.div-or {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .line-or {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #555;
+        width: 80%;
+    }
+
+    .line-or::before,
+    .line-or::after {
+        content: "";
+        flex: 1;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .line-or:not(:empty)::before {
+        margin-right: 0.75em;
+    }
+
+    .line-or:not(:empty)::after {
+        margin-left: 0.75em;
+    }
+}
