@@ -1,29 +1,26 @@
+@use './breakpoints' as bp;
 // _mixins.scss
 
-// Evita repetir media queries.
+@mixin mobile {
+  @media (min-width: bp.$mobile) {
+    @content;
+  }
+}
 
-// @use './breakpoints' as bp;
+@mixin tablet {
+  @media (min-width: bp.$tablet) {
+    @content;
+  }
+}
 
-// @mixin tablet {
+@mixin laptop {
+  @media (min-width: bp.$laptop) {
+    @content;
+  }
+}
 
-//   @media (min-width: bp.$tablet) {
-
-//     @content;
-//   }
-// }
-
-// @mixin laptop {
-
-//   @media (min-width: bp.$laptop) {
-
-//     @content;
-//   }
-// }
-
-// @mixin desktop {
-
-//   @media (min-width: bp.$desktop) {
-
-//     @content;
-//   }
-// }
+@mixin desktop {
+  @media (min-width: bp.$desktop) {
+    @content;
+  }
+}
