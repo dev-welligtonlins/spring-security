@@ -16,6 +16,8 @@ services:
     build:
       context: ./spring_security
     container_name: faca-backend-1
+    environment:
+      INSTANCE_NAME: backend-1
     restart: unless-stopped
     depends_on:
       - postgres
@@ -28,6 +30,8 @@ services:
     build:
       context: ./spring_security
     container_name: faca-backend-2
+    environment:
+      INSTANCE_NAME: backend-2
     restart: unless-stopped
     depends_on:
       - postgres
