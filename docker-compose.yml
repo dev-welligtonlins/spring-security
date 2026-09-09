@@ -1,0 +1,64 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: faca-postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker_postgresql:/docker-entrypoint-initdb.d
+
+  backend-1:
+    build:
+      context: ./spring_security
+    container_name: faca-backend-1
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    expose:
+      - "8080"
+
+  backend-2:
+    build:
+      context: ./spring_security
+    container_name: faca-backend-2
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    expose:
+      - "8080"
+
+  nginx:
+    image: nginx:alpine
+    container_name: faca-nginx
+    restart: unless-stopped
+    depends_on:
+      - frontend
+      - backend-1
+      - backend-2
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+  frontend:
+    build:
+      context: ./front-login
+    container_name: faca-front
+    restart: unless-stopped
+    ports:
+      - "4200"
+    volumes:
+      - ./front-login:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
