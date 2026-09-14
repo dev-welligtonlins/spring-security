@@ -1,0 +1,72 @@
+# ==========================================
+# SISTEMA OPERACIONAL
+# ==========================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+
+# ==========================================
+# AMBIENTE / CREDENCIAIS
+# ==========================================
+
+# .env
+# .env.*
+# !.env.example
+
+# ==========================================
+# JAVA / MAVEN - SPRING SECURITY
+# ==========================================
+
+spring_security/target/
+spring_security/*.log
+spring_security/logs/
+
+# Maven
+spring_security/.mvn/wrapper/maven-wrapper.jar
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# ==========================================
+# ANGULAR / NODE - FRONT LOGIN
+# ==========================================
+
+front-login/node_modules/
+front-login/dist/
+front-login/.angular/
+front-login/.cache/
+
+# Logs
+front-login/*.log
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# IDEs
+# ==========================================
+
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# ==========================================
+# TESTES / COBERTURA
+# ==========================================
+
+coverage/
+
+# ==========================================
+# DOCKER
+# ==========================================
+
+docker-data/

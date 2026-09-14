@@ -1,17 +1,165 @@
-// _typography.scss
+@use './mixins' as mixins;
 
-// Tipografia.
+// TYPOGRAPHY TOKENS
 
-// $font-primary: 'Inter', sans-serif;
+:root {
 
-// Responsável por:
-
-// fontes
-// títulos
-// parágrafos
-
+  // Font Family
+  // ------------------------------------------------
+  --font-family-primary: 'Poppins', sans-serif;
+  --font-family-secondary: 'Inter', sans-serif;
 
 
-// sidebar -> font-weight: bold;    font-size: 14px;    font-size: 13px;    font-size: 18px;
-// navbar ->  font-size: 14px;      font-size: 16px;
-// styles ->  font-family: 'Inter', light;      font-size: 11px;      font-size: 12px;    font-size: 40px;    font-size: 30px;    font-size: 12px;    font-size: 13px;    font-size: 13px;
+  // Font Weight
+  // ------------------------------------------------
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+
+  // Font Size
+  // ------------------------------------------------
+  --font-size-xs: 0.75rem;      // 12px
+  --font-size-sm: 0.875rem;     // 14px
+  --font-size-md: 1rem;         // 16px
+  --font-size-lg: 1.125rem;     // 18px
+  --font-size-xl: 1.25rem;      // 20px
+  --font-size-2xl: 1.5rem;      // 24px
+  --font-size-3xl: 2rem;        // 32px
+  --font-size-4xl: 2.5rem;      // 40px
+  --font-size-5xl: 3rem;        // 48px
+  --font-size-6xl: 3.5rem;      // 56px
+
+
+  // Line Height (altura da linha ou espaçamento entre linhas)
+  // ------------------------------------------------
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.6;
+}
+
+
+// BODY
+// ==================================================
+body {
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+}
+
+
+// HEADINGS
+// ==================================================
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-primary);
+  margin: 0;
+}
+
+
+// H1
+// ==================================================
+h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+
+  // Tablet
+  @include mixins.tablet {
+    font-size: var(--font-size-4xl);
+  }
+
+  // Laptop
+  @include mixins.laptop {
+    font-size: var(--font-size-4xl);
+  }
+
+  // Desktop
+  @include mixins.desktop {
+    font-size: var(--font-size-5xl);
+  }
+
+  // Large
+  @include mixins.large {
+    font-size: var(--font-size-6xl);
+  }
+}
+
+
+// H2
+// ==================================================
+
+h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+
+  // Tablet
+  @include mixins.tablet {
+    font-size: var(--font-size-3xl);
+  }
+
+  // Desktop
+  @include mixins.desktop {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+
+// H3
+// ==================================================
+h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+
+  // Tablet
+  @include mixins.tablet {
+    font-size: var(--font-size-2xl);
+  }
+
+  // Desktop
+  @include mixins.desktop {
+    font-size: var(--font-size-3xl);
+  }
+}
+
+
+// ==================================================
+// H4
+// ==================================================
+
+h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+
+  @include mixins.desktop {
+    font-size: var(--font-size-xl);
+  }
+}
+
+
+// ==================================================
+// H5
+// ==================================================
+
+h5 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+
+// ==================================================
+// H6
+// ==================================================
+
+h6 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}

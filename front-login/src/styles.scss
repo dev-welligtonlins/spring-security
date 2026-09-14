@@ -1,4 +1,14 @@
-// @use '_fonts' as fonts;
+@use './styles/abstracts/colors';
+@use './styles/abstracts/typography';
+@use './styles/abstracts/spacing';
+@use './styles/abstracts/breakpoints';
+@use './styles/abstracts/mixins';
+
+@use './styles/base/reset';
+@use './styles/base/global';
+
+@use './styles/layout/sidebar';
+@use './styles/layout/navbar';
 
 html,
 body {

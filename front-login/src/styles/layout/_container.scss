@@ -1,14 +1,28 @@
-// _container.scss
-// .container {
+@use '../abstracts/breakpoints' as bp;
 
-//   width: 100%;
+.container-app {
+  width: 100%;
+  max-width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
 
-//   max-width: 1200px;
+  @media (min-width: bp.$mobile) {
+    max-width: 540px;
+  }
 
-//   margin: 0 auto;
+  @media (min-width: bp.$tablet) {
+    max-width: 720px;
+  }
 
-//   padding: 1rem;
-// }
-// Responsabilidade
-// Centralizar conteúdo
-// Controlar largura máxima
+  @media (min-width: bp.$laptop) {
+    max-width: 960px;
+  }
+
+  @media (min-width: bp.$desktop) {
+    max-width: 1200px;
+  }
+
+  @media (min-width: bp.$large) {
+    max-width: 1440px;
+  }
+}

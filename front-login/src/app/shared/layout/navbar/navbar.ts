@@ -3,6 +3,7 @@ import { UserState } from '../../../core/auth/state/user.state';
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SidebarState } from '../../../core/state/sidebar.state';
 
 @Component({
   selector: 'app-navbar',
@@ -20,9 +21,8 @@ export class Navbar {
   };
 
   protected userState = inject(UserState);
-
   private authService = inject(AuthService);
-
+  protected readonly sidebarState = inject(SidebarState);
   searchQuery = '';
 
   // exemplo de dados do dashboard que serão filtrados

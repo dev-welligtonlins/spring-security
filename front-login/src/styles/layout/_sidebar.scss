@@ -1,7 +1,104 @@
-// _sidebar.scss
+@use '../abstracts/breakpoints' as bp;
 
-// Estilos base da sidebar.
+.sidebar {
+  position: fixed;
 
-// Responsabilidade
-// Menu lateral
-// Área de navegação
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  padding: var(--space-md);
+  background: var(--secondary);
+  z-index: 1050;
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: #fff;
+    margin-bottom: var(--space-sm);
+
+    &:hover {
+      color: #000;
+      background: #ebebeb;
+      border-radius: 25rem;
+    }
+
+    &.active {
+      font-weight: 700;
+      color: #fff;
+      background: var(--primary);
+      border-radius: 25rem;
+    }
+  }
+
+  .profile-area {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .profile-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.509);
+  }
+
+  .profile-faca {
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .user-info {
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    color: #fff;
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================
+   MOBILE / TABLET
+   ========================================= */
+
+@media (max-width: #{bp.$laptop - 1px}) {
+
+  .sidebar.sidebar--open {
+    transform: translateX(0);
+  }
+
+}
+
+
+/* =========================================
+   DESKTOP
+   ========================================= */
+
+@media (min-width: bp.$laptop) {
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    transform: none;
+  }
+
+}
+
+
+/* =========================================
+   OVERLAY
+   ========================================= */
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}

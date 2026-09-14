@@ -1,11 +1,26 @@
 .layout {
-  display: flex;
-  background: #141519;
+  min-height: 100vh;
 }
 
 .content {
-  margin-left: 260px; /* mesma largura da sidebar */
-  width: calc(100%);
+  min-width: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: #232323;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    min-height: 100vh;
+
+    background: #141519;
+  }
 }

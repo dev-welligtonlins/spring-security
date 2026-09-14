@@ -1,37 +1,67 @@
 <header class="navbar">
+
+  <!-- BUSCA -->
   <div class="search-bar">
+
     <form (submit)="$event.preventDefault()">
-      <div class="input-icon w-10">
+
+      <div class="input-icon">
+
         <i class="bi bi-search"></i>
-        <input class="form-control" type="search" placeholder="Pesquisar serviços, clientes..."
-          [(ngModel)]="searchQuery" aria-label="Pesquisar" name="search" />
+
+        <input
+          class="form-control"
+          type="search"
+          placeholder="Pesquisar..."
+          [(ngModel)]="searchQuery"
+          aria-label="Pesquisar"
+          name="search"
+        />
+
       </div>
+
     </form>
 
-    <div class="profile-foto">
-      <img [src]="" class="profile-img me-3">
-      <span class="profile-nome"></span>
-
-      <div class="user-info">
-        <span>Olá, {{ user()?.login }} </span>
-      </div>
-
-      <div class="btn-profile">
-        <button type="button" class="btn" (click)="logout()">
-          <i class="bi bi-box-arrow-right"></i>
-        </button>
-      </div>
-
-    </div>
   </div>
 
-  <nav class="navbar navbar-light bg-light d-lg-none">
-    <div class="container-fluid">
-      <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"
-        data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
-        <i class="bi bi-list"></i> Menu
-      </button>
-      <span class="navbar-brand mb-0 h1">Dashboard</span>
+
+  <!-- PERFIL -->
+  <div class="profile-foto">
+
+    <img
+      [src]=""
+      class="profile-img"
+    >
+
+    <div class="user-info">
+      <span>
+        Olá, {{ user()?.login }}
+      </span>
     </div>
-  </nav>
+
+    <div class="btn-profile">
+
+      <button
+        type="button"
+        class="btn"
+        (click)="logout()"
+      >
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- HAMBURGER -->
+  <button
+    type="button"
+    class="sidebar-toggle"
+    (click)="sidebarState.toggle()"
+    aria-label="Abrir menu"
+  >
+    <i class="bi bi-list"></i>
+  </button>
+
 </header>
